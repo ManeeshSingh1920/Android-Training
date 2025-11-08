@@ -1,0 +1,117 @@
+🚀 AOSP + Xrda3/Xrda3car + Cuttlefish Setup (Manual Steps)
+🧩 1. Install Required Packages
+sudo apt update -y
+sudo apt upgrade -y
+Install build dependencies:
+sudo apt install -y flex bison gcc-multilib g++-multilib git gperf \
+libxml2-utils make zlib1g-dev zip curl patch vim lzop tree python \
+python-mako ccache libncurses5-dev libssl-dev graphviz qemu-kvm eog \
+python-is-python3 devscripts config-package-dev debhelper-compat
+
+🏗️ 2. Create AOSP Directory and Initialize Repo
+Create your AOSP workspace:
+mkdir -p $HOME/aosp_14_training
+cd $HOME/aosp_14_training
+
+Initialize repo for Android 14 (r21):
+repo init -u https://android.googlesource.com/platform/manifest -b android-14.0.0_r21
+
+repo sync -c -j$(nproc)
+
+📂 3. Add Xrda3 / Xrda3car Local Manifest
+Clone the manifest for your device:
+git clone https://github.com/BuildandShip-stack/xrda3-local-manifest.git .repo/local_manifests -b android14
+Sync again to fetch device-specific repositories:
+repo sync -c -j$(nproc)
+🧱 4. Build AOSP for Xrda3car
+Setup environment:
+cd $HOME/aosp_14_training
+source build/envsetup.sh
+lunch xrda3car-userdebug
+m -j$(nproc)
+🕒 This step can take several hours depending on your system performance.
+
+💾 5. Verify KVM (Virtualization Support)
+Check if your system supports KVM:
+ls /dev/kvm
+If output shows /dev/kvm, it’s available ✅
+If not — enable Virtualization / Nested Virtualization in BIOS or your VM settings.
+
+🧰 6. Setup and Build Cuttlefish Emulators
+Install extra tools:
+sudo apt install -y git devscripts config-package-dev debhelper-compat
+Clone Cuttlefish:
+
+cd $HOME/aosp_14_training
+git clone https://github.com/google/android-cuttlefish.git
+cd android-cuttlefish/tools/buildutils/
+./build_packages.sh
+⚠️ If you get a Bazel error:
+./installbazel.sh
+./build_packages.sh
+
+after this 
+
+Install Cuttlefish:
+sudo apt install ./cuttlefish-base_*.deb ./cuttlefish-user_*.deb
+
+
+Add user to emulator groups:
+sudo usermod -aG kvm,cvdnetwork,render $USER
+sudo reboot
+
+🔁 7. After Reboot – Prepare Build Environment
+After reboot, re-enter your build environment:
+cd $HOME/aosp_14_training
+source build/envsetup.sh
+lunch xrda3car-userdebug
+
+🖥️ 8. Launch the Cuttlefish Emulator (WebRTC UI)
+Start emulator with WebRTC interface:
+launch_cvd -start_webrtc
+
+You’ll see logs like:
+VIRTUAL_DEVICE_DISPLAY_POWER_MODE_CHANGED
+VIRTUAL_DEVICE_BOOT_STARTED
+VIRTUAL_DEVICE_BOOT_COMPLETED
+Virtual device booted successfully
+
+
+🌐 9. Connect to Emulator in Browser
+Launch Google Chrome or Chromium	
+Visit:https://0.0.0.0:8443
+
+You’ll see:
+Your connection is not private
+Click:
+
+Advanced
+
+Proceed to localhost (unsafe)
+
+You’ll see a page with “Available devices” → click Connect beside cvd-1
+
+
+The emulator UI will open in your browser.
+You’ll see the Android home screen and instrument cluster.
+xrda3@xrda3:~/aosp_14_training$ cvd_status 
+cvd_status I 11-08 01:59:37 26719 26719 main.cc:130] Requesting status for instance cvd-1
+cvd_status I 11-08 01:59:37 26719 26719 main.cc:143] run_cvd is active for instance cvd-1
+
+
+To stop the emulator:
+
+stop_cvd
+
+Successfully stopped device cvd-1: 0.0.0.0:6520
+
+
+🧾 11. Verify ADB Connection (Optional)
+
+
+adb devices
+Output example:
+List of devices attached
+0.0.0.0:6520	device
+
+

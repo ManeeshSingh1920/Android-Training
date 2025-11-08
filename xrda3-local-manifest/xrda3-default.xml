@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- Remote definition -->
+    <remote name="github" fetch="https://github.com/BuildandShip-stack" />
+
+    <!-- XRDA3 device repo (contains both phone and car configs) -->
+    <project path="device/xrda3" name="training_XRDA3" revision="android14" remote="github" />
+</manifest>
+

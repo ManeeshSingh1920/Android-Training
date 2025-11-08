@@ -1,9 +1,9 @@
 #!/bin/bash
 # Written by Ankur Pandey
-# Version 1.0: 5 Nov 2025. Updated for AOSP 10 and Ubuntu 20.04
+# Version 1.4: 6 Nov 2025. Updated for AOSP 14 and Ubuntu 20.04
 
 echo
-echo "This script will check that this PC is suitable for building AOSP 10"
+echo "This script will check that this PC is suitable for building AOSP 14"
 echo
 echo "Checking hardware..."
 
@@ -32,13 +32,14 @@ fi
 DISK_KBYTES=$(df  ${HOME} | awk '{if (NR == 2) print $4}')
 DISK_GBYTES=$(( ${DISK_KBYTES} / 1048576 ))
 echo -n "Free disk space in directory ${HOME}: ${DISK_GBYTES} GiB, "
-if [ ${DISK_GBYTES} -lt 250 ]; then
+if [ ${DISK_GBYTES} -lt 370 ]; then
     echo "FAIL"
-    echo " Insufficient disk space in ${HOME}, we need at least 250 GiB"
+    echo " Insufficient disk space in ${HOME}, we need at least 370 GiB"
     FAILED=y
 else
     echo "OK"
 fi
+
 
 # Check the distribution is Ubuntu 20.04
 echo -n "Checking Linux distribution, "
@@ -62,7 +63,7 @@ else
 fi
 if [ $FAILED == y ]; then
     echo
-    echo "FAIL: this machine is not suitable for building AOSP 10"
+    echo "FAIL: this machine is not suitable for building AOSP 14"
     echo
     exit 1
 fi
