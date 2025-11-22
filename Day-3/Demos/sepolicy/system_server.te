@@ -1,0 +1,2 @@
+allow system_server simpleservice_service:service_manager find;
+

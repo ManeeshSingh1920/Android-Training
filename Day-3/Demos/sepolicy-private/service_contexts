@@ -1,0 +1,3 @@
+
+# So that we can addService "simpleservice"
+simpleservice u:object_r:simpleservice_service:s0

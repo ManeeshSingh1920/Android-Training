@@ -1,0 +1,17 @@
+cc_binary {
+name: "android.hardware.lights-service.xrda3",
+relative_install_path: "hw",
+init_rc: ["lights-xrda3.rc"],
+vintf_fragments: ["lights-xrda3.xml"],
+vendor: true,
+shared_libs: [
+"libbase",
+"libbinder_ndk",
+"android.hardware.light-V2-ndk",
+],
+srcs: [
+"Lights.cpp",
+"main.cpp",
+],
+overrides: ["android.hardware.lights-service.example"],
+}
