@@ -1,0 +1,6 @@
+cc_binary {
+    name: "helloworld-bp",
+    srcs: ["helloworld.c"],
+    vendor: true,
+    shared_libs: ["liblog"],
+}

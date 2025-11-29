@@ -1,0 +1,504 @@
+1-How to get the secure boot tool 
+	A tool for Secure Boot is included in Security Tools . For more details on Security Tools , refer to Chapter 1.4 How to Get Latest
+Version of Security Tools on “ TCCxxxx Security-User Guide for Security Tools"
+
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore$ ncftp -u customer -p telecustomer12! rf.telechips.com
+NcFTP 3.2.5 (Feb 02, 2011) by Mike Gleason (http://www.NcFTP.com/contact/).
+Connecting to 210.113.67.203...                                                                                                                                                                            
+(vsFTPd 3.0.5)
+Logging in...                                                                                                                                                                                              
+Login successful.
+Logged in to rf.telechips.com.   
+
+
+                                                                                                                                                                          
+ncftp / > cd share/security/tools/
+Directory successfully changed.
+
+
+ncftp /share/security/tools > dir
+
+-rw-rw-r--    1 1002     10000      8300663 Jan 25  2022 security_tools_v1.10.tar.gz
+-rw-rw-r--    1 1002     10000      8305911 Jan 19  2022 security_tools_v1.11.tar.gz
+-rw-rw-r--    1 1002     10000      8306050 Jan 25  2022 security_tools_v1.12.tar.gz
+-rw-rw-r--    1 1002     10000     28611616 Jan 25  2022 security_tools_v1.13.tar.gz
+-rw-rw-r--    1 1002     10000      8306931 Jan 26  2022 security_tools_v1.14.tar.gz
+-rw-rw-r--    1 1002     10000      8309524 May 31  2022 security_tools_v1.15.tar.gz
+-rw-rw-r--    1 1002     10000      8305741 May 31  2022 security_tools_v1.16.tar.gz
+-rw-rw-r--    1 1002     10000      8309681 Jun 15  2022 security_tools_v1.17.tar.gz
+-rw-rw-r--    1 1002     10000      8309032 Aug 10  2022 security_tools_v1.19.tar.gz
+-rw-rw-r--    1 1002     10000      8339989 May 11  2023 security_tools_v1.21.tar.gz
+-rw-rw-r--    1 1002     10000      8340188 Jun  8  2023 security_tools_v1.22.tar.gz
+-rw-rw-r--    1 1002     10000      8341184 Nov 21  2023 security_tools_v1.23.tar.gz
+-rw-rw-r--    1 1002     10000     12989098 Dec  1  2023 security_tools_v1.24.tar.gz
+-rw-rw-r--    1 1002     10000      8393639 Dec 11  2023 security_tools_v1.25.tar.gz
+-rw-rw-r--    1 1002     10000      8394651 Dec 19  2023 security_tools_v1.26.tar.gz
+-rw-rw-r--    1 1002     10000     13046004 Jul  5  2024 security_tools_v1.27.tar.gz
+-rw-rw-r--    1 1002     10000      8292941 Mar 12  2021 security_tools_v1.4.tar.gz
+-rw-rw-r--    1 1002     10000      8246982 May 10  2021 security_tools_v1.5.tar.gz
+-rw-rw-r--    1 1002     10000      8247898 May 10  2021 security_tools_v1.6.tar.gz
+-rw-rw-r--    1 1002     10000      8247967 May 12  2021 security_tools_v1.7.tar.gz
+-rw-rw-r--    1 1002     10000      8248320 Jun 10  2021 security_tools_v1.8.tar.gz
+-rw-rw-r--    1 1002     10000      8299407 Jun 29  2021 security_tools_v1.9.tar.gz
+-rw-rw-r--    1 1002     10000     13046004 Jul  5  2024 security_tools_vLastest.tar.gz
+
+
+ncftp /share/security/tools > get security_tools_v1.27.tar.gz
+security_tools_v1.27.tar.gz:                            12.44 MB  248.34 kB/s  
+
+
+ncftp /share/security/tools > bye
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore$ ls
+8_april_out_directory  bootstrap.bash                     build_log_06_Nov_23.txt  cts          external    libnativehelper     platform_testing             system                       tools
+Android.bp             build                              build_log_1feb.txt       dalvik       frameworks  logsA_10_aug_2.txt  prebuilts                    Tcc_8050_build_logs_all.txt  vendor
+art                    build-all-script_805x_modified.sh  build_log_27feb24.txt    developers   hardware    Makefile            sdk                          Tcc_8050_build_logs.txt
+bionic                 build-all-script_samsan.sh         build_log_27feb.txt      development  kernel      packages            security_tools_v1.27.tar.gz  test
+bootable               build-all-script.sh                build_log_31_Oct_23.txt  device       libcore     pdk                 shrushti.txt                 toolchain
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore$ 
+
+
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools$ tree
+.
+├── common
+│   ├── EncTool
+│   ├── mke2fs
+│   ├── OtpImgGen
+│   ├── OtpImgGenV2
+│   └── otpv3gen.py
+├── config.ini
+├── generate.sh
+├── module
+│   ├── HDCP14
+│   │   ├── genOTPImage.sh
+│   │   ├── hdcp14_key_convert_tool
+│   │   └── hdcp1x_key_encryption_tool
+│   ├── HDCP2_ESM
+│   │   ├── build_tx.sh
+│   │   ├── firmware
+│   │   │   ├── esm_config.i.384
+│   │   │   ├── esm_config.i.594
+│   │   │   ├── firmware.aic
+│   │   │   └── firmware.rom
+│   │   ├── genOTPImage.sh
+│   │   └── tools
+│   │       ├── aictool
+│   │       ├── esm_swap
+│   │       └── hdcpkeys
+│   ├── JTAG
+│   │   ├── genkey.sh
+│   │   ├── jtagcfg.sh
+│   │   ├── tcc70xx
+│   │   │   └── jtagscript
+│   │   │       └── password_matching.cmm
+│   │   ├── tcc750x
+│   │   │   └── jtagscript
+│   │   │       └── password_matching.cmm
+│   │   ├── tcc802x
+│   │   │   └── jtagsript
+│   │   │       └── password_matching.cmm
+│   │   ├── tcc803x
+│   │   │   └── jtagscript
+│   │   │       └── password_matching.cmm
+│   │   ├── tcc805x
+│   │   │   ├── jtagscript
+│   │   │   │   ├── eba.cmm
+│   │   │   │   ├── ebcra.cmm
+│   │   │   │   ├── readhexle.cmm
+│   │   │   │   ├── writehexbe.cmm
+│   │   │   │   └── writehexle.cmm
+│   │   │   ├── securejtag
+│   │   │   └── source
+│   │   │       └── securejtag.tar.gz
+│   │   ├── tcc807x
+│   │   │   ├── jtagscript
+│   │   │   │   ├── eba.cmm
+│   │   │   │   ├── ebcra.cmm
+│   │   │   │   ├── readhexle.cmm
+│   │   │   │   ├── writehexbe.cmm
+│   │   │   │   └── writehexle.cmm
+│   │   │   ├── securejtag
+│   │   │   └── source
+│   │   │       └── securejtag.tar.gz
+│   │   ├── tcc899x
+│   │   │   └── jtagscript
+│   │   │       └── password_matching.cmm
+│   │   └── tcc901x -> tcc899x
+│   ├── Playready
+│   ├── SecureBoot
+│   │   ├── securebootcfg.sh
+│   │   ├── securebootota.sh
+│   │   ├── tcSignTool
+│   │   └── tcSignTool_v3
+│   └── TASign
+│       ├── tcc750x
+│       ├── tcc803x
+│       └── tcc899x
+├── README
+└── TID
+    └── PUBLIC.PID
+
+31 directories, 46 files
+
+
+
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools$ cd module/SecureBoot
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ 
+
+
+
+==============================
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ tcSignTool_v3 genkey ecdsa ~/root.key 2
+tcSignTool_v3: command not found
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 genkey ecdsa ~/root.key 2
+generating /home/oem/root.key (320 bytes)
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 genkey ecdsa ~/master.key 1
+generating /home/oem/master.key (192 bytes)
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 genkey ecdsa ~/image.key 1
+generating /home/oem/image.key (192 bytes)
+
+Note => Output files are generated in ‘~/’ directory.
+Important: The same key should be used for the same product model. Care must be taken to keep the key safe.
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls -l ~/root.key ~/master.key ~/image.key
+-rw-rw-r-- 1 oem oem 192 Nov 20 14:45 /home/oem/image.key
+-rw-rw-r-- 1 oem oem 192 Nov 20 14:45 /home/oem/master.key
+-rw-rw-r-- 1 oem oem 320 Nov 20 14:44 /home/oem/root.key
+
+
+=============================
+
+
+2. Generate the MCERT image
+
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 mcert mcert.bin ~/root.key ~/master.key
+=========================================
+Generating MCERT Image.
+Successful mcert image creation.
+=========================================
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+mcert.bin  securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ 
+
+
+
+
+
+
+
+
+
+
+✅ Step 2 — Sign the HSM firmware
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+mcert.bin  securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ hsm.cs.bin
+hsm.cs.bin: command not found
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 hsmfw hsm.cs.bin hsm.cs.bin.signed ~/root.key
+Can NOT open input file
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+mcert.bin  securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ cp /home/oem/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/bootable/bootloader/u-boot/boot-firmware/prebuilt/hsm.cs.bin \
+>    /home/oem/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot/
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ 
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+hsm.cs.bin  mcert.bin  securebootcfg.sh  securebootota.sh  tcSignTool  tcSignTool_v3
+
+
+
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 hsmfw hsm.cs.bin hsm.cs.bin.signed ~/root.key
+=========================================
+Signing HSM-FW Image.
+Successful HSM-F/W signed image creation.
+=========================================
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+hsm.cs.bin         mcert.bin         securebootota.sh  tcSignTool_v3
+hsm.cs.bin.signed  securebootcfg.sh  tcSignTool
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ file hsm.cs.bin.signed 
+hsm.cs.bin.signed: data
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ file hsm.cs.bin
+hsm.cs.bin: data
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 hsmfw hsm.cs.bin hsm.cs.bin.signed ~/root.key 1
+=========================================
+Signing HSM-FW Image.
+Successful HSM-F/W signed image creation.
+=========================================
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls
+hsm.cs.bin         mcert.bin         securebootota.sh  tcSignTool_v3
+hsm.cs.bin.signed  securebootcfg.sh  tcSignTool
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ./tcSignTool_v3 hsmfw hsm.cs.bin hsm.cs.bin.signed ~/root.key 1 5
+=========================================
+Signing HSM-FW Image.
+Successful HSM-F/W signed image creation.
+=========================================
+
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ ls -l
+total 2208
+-rw-r--r-- 1 oem oem   32768 Nov 20 15:09 hsm.cs.bin
+-rw-rw-r-- 1 oem oem   32768 Nov 20 15:17 hsm.cs.bin.signed
+-rw-rw-r-- 1 oem oem     512 Nov 20 15:04 mcert.bin
+-rwxr-xr-x 1 oem oem    6936 Sep 20  2023 securebootcfg.sh
+-rwxr-xr-x 1 oem oem    2868 Sep 20  2023 securebootota.sh
+-rwxr-xr-x 1 oem oem 1037448 Sep 20  2023 tcSignTool
+-rwxr-xr-x 1 oem oem 1137800 Dec 13  2023 tcSignTool_v3
+oem@xrda3:~/Documents/Telchip_8050/Telechip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot$ 
+
+
+✅ Step 3 — Sign Boot F/W Image
+
+tcSignTool_v3 secfw [IN_FILE] [OUT_FILE] [MASTER_KEY_FILE] [IMG_KEY_FILE] {[IS_ENCRYPTED(0/1)] [RBID]}
+
+./tcSignTool_v3 secfw unsigned_images/ca72_bl3.rom ca72_bl3.rom.signed ~/master.key ~/image.key 1 5
+=========================================
+Signing A72-BL3 Image.
+Successful secure image creation.
+=========================================
+
+Do the same for all the files 
+
+FILES=(
+    ca53_bl1.rom
+    ca53_bl2.rom
+    ca53_bl3.rom
+    ca72_bl1.rom
+    ca72_bl2.rom
+    ca72_bl3.rom
+    scfw.rom
+    optee.rom
+    r5_bl1-snor.rom
+    r5_fw_TCC8050.rom
+    r5_sub_fw.rom
+    dram_params.bin
+    fwdn.rom
+    boot.img    # CA72 Kernel
+    tc-boot-tcc8050-sub.img     # CA53 Kernel
+)
+
+
+
+
+
+
+✅ Step 4- Android Verified Boot (AVB)
+
+Generating AVB BOOT
+
+1. Overview
+
+In Android 10, the kernel image and recovery image are signed using AVB (Android Verified Boot).
+To enforce secure boot on Telechips SoCs:
+
+AVB verifies kernel images
+
+Telechips Secure Boot verifies other images
+
+This README covers:
+
+Generating a new RSA4096 private key
+
+Extracting the AVB public key
+
+Converting the public key into a C array
+
+Replacing the key inside U-Boot (avb_verify.c)
+
+Updating BoardConfig.mk to use the new key
+
+2. Generate a New AVB Private Key
+
+Navigate to your SecureBoot tool directory:
+cd ~/Documents/Telchip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot
+
+Create a directory to store your new private key:
+
+# mkdir Generated_AVB_Key
+
+Generate a 4096-bit RSA private key:
+# openssl genrsa -out ./Generated_AVB_Key/rsa4096_prikey.pem 4096
+
+You should see:
+
+Generating RSA private key, 4096 bit long modulus (2 primes)
+++++
+++++
+e is 65537 (0x010001)
+
+3. Extract the Public Key for AVB
+
+Create an output directory: 	 	 		
+
+# mkdir Extracted_AVB_Key
+
+Run avbtool to extract the AVB root public key:
+avbtool extract_public_key \
+  --key Generated_AVB_Key/rsa4096_prikey.pem \
+  --output Extracted_AVB_Key/avb_root_pub.bin
+
+
+Confirm the file was generated:
+
+# ls Extracted_AVB_Key/
+
+
+4. Convert Public Key to C Array
+Run xxd to get a C-compatible array:
+
+# xxd -c 10 -i -a Extracted_AVB_Key/avb_root_pub.bin
+
+
+You will get an output similar to:
+
+unsigned char Extracted_AVB_Key_avb_root_pub_bin[] = {
+  0x00, 0x00, 0x10, 0x00, 0xdc, 0xc8, 0xf6, 0xed, 0xd2, 0x42,
+  ...
+  0x90,
+};
+
+
+Copy the entire array.
+
+5. Insert Public Key into U-Boot
+
+Edit:
+$ANDROID_BUILD_TOP/bootable/bootloader/u-boot/common/avb_verify.c
+
+Replace the existing key:
+
+const unsigned char avb_root_pub[1032] = {
+    // paste your generated array here
+};
+
+Make sure:
+
+The array name is avb_root_pub
+
+The size matches the length of your generated avb_root_pub.bin (typically 1032 bytes
+
+6. Update BoardConfig.mk
+
+Edit
+$ANDROID_BUILD_TOP/device/telechips/<TARGET_PLATFORM>/BoardConfig.mk
+
+Add or update:
+
+BOARD_AVB_ALGORITHM := SHA256_RSA4096
+BOARD_AVB_KEY_PATH := /home/oem/Documents/Telchip_8050/mydroid/maincore/security_tools_v1.27/security_tools/module/SecureBoot/Generated_AVB_Key/rsa4096_prikey.pem
+
+Use an absolute path, not a relative one.
+
+7. Notes
+
+Losing your private key means you can never sign compatible updates again → keep it safe.
+
+AVB only secures the kernel image; Telechips Secure Boot handles the rest.
+
+The public key size must match the expected length (typically 1032 bytes).
+
+Always rebuild U-Boot after changing avb_root_pub.
+
+
+
+
+=====================================================================================================================================================================================================
+
+
+
+
+
+✅ Note=> # ⭐ **Summary: Secure Boot Limitations on TCC8050 (Telechips)**
+
+
+
+Below is the **precise technical summary** of the Secure Boot restrictions on the Telechips TCC8050 platform, especially relevant while working on Android 10.
+
+---
+
+## 🔒 **Irreversible Nature of Secure Boot**
+
+Once Secure Boot is enabled on a TCC8050 board:
+
+### ❌ **You cannot disable Secure Boot again.**
+
+Secure Boot becomes **permanently active**.
+
+### ❌ **OTP (One-Time Programmable) memory cannot be rewritten.**
+
+The Root Key burned into OTP is **permanent**.
+
+---
+
+## 🚫 **Firmware Restrictions After Secure Boot**
+
+After Secure Boot is enabled:
+
+### ❌ **You cannot flash normal/unsigned firmware images.**
+
+Unsigned or modified BL1, BL2, U-Boot, OPTEE, kernel, or R5 images **will fail to boot**.
+
+### ❌ **Fastboot flashing is no longer allowed.**
+
+Only signed images through **FWDN** are accepted.
+
+### ❌ **If signed images are incorrect → board will NOT boot.**
+
+Any mismatch in signing keys, MCERT, RBID, or image formatting results in **irrecoverable boot failure**.
+
+---
+
+## 🔧 **Allowed Operations After Secure Boot**
+
+Even after enabling Secure Boot:
+
+### ✔ You *can* flash firmware
+
+…but only:
+
+* Using **FWDN**
+* With all images **properly signed** with the correct master/image keys
+
+Unsigned images will always be rejected by hardware verification.
+
+---
+
+## ⚠️ **Risk Level for Development Boards (EVB)**
+
+Enabling Secure Boot on an EVB is **high risk**, because:
+
+* The board becomes locked
+* OTP is burned forever
+* Any image signing error can **brick the EVB**
+* Recovery requires **Telechips factory tools + JTAG**
+
+It is not reversible or recoverable by developers.
+
+---
+
+# ⭐ **Final Recommendation**
+
+Secure Boot should be enabled **only when the Android system is completely stable** and all partitions, bootloader components, and firmware images are finalized.
+
+For development and debugging, Secure Boot should remain **disabled**.
+

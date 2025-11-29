@@ -1,0 +1,24 @@
+cc_binary {
+    name: "vendor.xrda3.simple-hal-service",
+
+    // Install under /system/bin 
+    init_rc: ["simple-hal-xrda3.rc"],   // <--- add this If you want to auto start it like a real HAL
+
+    srcs: [
+        "Simple.cpp",
+        "main.cpp",
+    ],
+
+    shared_libs: [
+        "libbase",
+        "liblog",
+        "libbinder_ndk",
+        "vendor.xrda3.simple_hal_interface-ndk",  // this will be generated from our AIDL i.e aidl_interface module
+    ],
+    
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+}
+

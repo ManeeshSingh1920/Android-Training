@@ -1,0 +1,6 @@
+service xrda3.simple-hal-default /system/bin/vendor.xrda3.simple-hal-service
+    class main
+    user system
+    group system
+    oneshot
+
