@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<compatibility-matrix version="7.0" type="framework">
+    <!-- Device-specific HIDL HAL for training/demo -->
+    <hal format="hidl" optional="true">
+        <name>vendor.xrda3.simple</name>
+        <version>1.0</version>
+        <interface>
+            <name>ISimple</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>
+

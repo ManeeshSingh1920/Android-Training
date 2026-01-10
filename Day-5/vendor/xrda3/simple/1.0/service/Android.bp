@@ -1,0 +1,26 @@
+cc_binary {
+    name: "vendor.xrda3.simple@1.0-service",
+    vendor: true,
+    relative_install_path: "hw",
+
+    srcs: [
+        "SimpleService.cpp",
+    ],
+
+    init_rc: [
+        "vendor.xrda3.simple@1.0-service.rc",
+    ],
+    
+    vintf_fragments: ["manifest_simple.xml"],
+
+    shared_libs: [
+        "liblog",
+        "libutils",
+        "libbase",
+        "libhidlbase",
+        "libhidltransport",
+        "libhwbinder",
+        "vendor.xrda3.simple@1.0",
+    ],
+}
+

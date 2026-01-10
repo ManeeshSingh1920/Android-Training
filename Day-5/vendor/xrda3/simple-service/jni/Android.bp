@@ -1,0 +1,22 @@
+cc_library_shared {
+    name: "libsimple_hal_jni",
+
+    // This will be loaded by a system app (simpleServiceApp) plus This lib will be packaged inside simple-service APK
+    system_ext_specific: true,
+
+    srcs: [
+        "SimpleHalJni.cpp",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libbase",
+        "libbinder_ndk",
+        "vendor.xrda3.simple_hal_interface-ndk",  // from our AIDL HAL
+    ],
+
+    header_libs: [
+        "jni_headers",
+    ],
+}
+

@@ -1,0 +1,19 @@
+cc_binary {
+    name: "simple_hidl_client",
+    vendor: true,
+
+    srcs: [
+        "SimpleClient.cpp",
+    ],
+
+    shared_libs: [
+        "liblog",
+        "libutils",
+        "libbase",
+        "libhidlbase",
+        "libhidltransport",
+        "libhwbinder",
+        "vendor.xrda3.simple@1.0",
+    ],
+}
+

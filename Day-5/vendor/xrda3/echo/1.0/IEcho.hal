@@ -1,0 +1,12 @@
+package android.hardware.echo@1.0;
+
+interface IEcho {
+    // Simple string echo - returns the input string with prefix
+    echoString(string input) generates (string result);
+    
+    // Math operation - doubles the input number
+    echoInt(int32_t input) generates (int32_t result);
+    
+    // Data processing - processes byte array
+    processData(vec<uint8_t> data) generates (vec<uint8_t> processed);
+};

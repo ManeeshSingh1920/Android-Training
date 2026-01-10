@@ -1,0 +1,9 @@
+service vendor.xrda3.simple@1.0-service /vendor/bin/hw/vendor.xrda3.simple@1.0-service
+    class hal
+    user system
+    group system
+    seclabel u:r:hal_vendor_default:s0
+    oneshot
+    interface vendor.xrda3.simple@1.0::ISimple default
+
+

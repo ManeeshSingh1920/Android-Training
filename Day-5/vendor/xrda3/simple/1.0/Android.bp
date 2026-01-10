@@ -1,0 +1,15 @@
+hidl_interface {
+    name: "vendor.xrda3.simple@1.0",
+    root: "vendor.xrda3",
+
+    srcs: [
+        "ISimple.hal",
+    ],
+
+    interfaces: [
+        "android.hidl.base@1.0",
+    ],
+
+    // NOTE:
+    // Do NOT put host_supported or vendor_available here.
+}

@@ -1,0 +1,2 @@
+# Define package name "com.example.simpleservice" to be domain simpleservice_app
+user=system seinfo=platform name=com.example.simpleservice domain=simpleservice_app

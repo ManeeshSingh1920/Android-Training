@@ -1,0 +1,12 @@
+package vendor.xrda3.simple@1.0;
+
+/**
+ * Very small HIDL demo for training.
+ * Just adds two numbers.
+ */
+interface ISimple {
+    /**
+     * Adds two 32-bit integers and returns the result.
+     */
+    add(int32_t a, int32_t b) generates (int32_t result);
+};

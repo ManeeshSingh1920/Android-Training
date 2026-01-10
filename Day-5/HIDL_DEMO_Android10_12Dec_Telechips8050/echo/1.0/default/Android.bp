@@ -1,0 +1,28 @@
+cc_defaults {
+    name: "echo_v1_0_defaults",
+    shared_libs: [
+        "libhidlbase",
+        "libhidltransport", 
+        "liblog",
+        "libutils",
+        "libcutils",
+        "android.hardware.echo@1.0",
+    ],
+    cflags: [
+        "-Wall",
+        "-Wextra", 
+        "-Werror",
+    ],
+}
+
+cc_binary {
+    name: "android.hardware.echo@1.0-service",
+    defaults: ["echo_v1_0_defaults"],
+    init_rc: ["android.hardware.echo@1.0-service.rc"],
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: [
+        "service.cpp",
+        "Echo.cpp",
+    ],
+}

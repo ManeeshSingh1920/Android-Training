@@ -1,0 +1,31 @@
+// System app that exposes the "simpleservice" Binder service
+android_app {
+    name: "simple-service",
+
+    // Install to /system_ext/app
+    system_ext_specific: true,
+    privileged: true,
+
+    manifest: "AndroidManifest.xml",
+
+    // All Java sources for the service app
+    srcs: [
+        "src/**/*.java",
+    ],
+
+    // Sign as platform app (sharedUserId=android.uid.system)
+    certificate: "platform",
+
+    // JNI lib that talks to Simple HAL
+    jni_libs: [
+        "libsimple_hal_jni",
+    ],
+
+    // This app uses platform APIs
+    platform_apis: true,
+
+    // Link against SimpleManager platform library JAR
+    libs: ["com.example.simplemanager"],
+    uses_libs: ["com.example.simplemanager"],
+}
+

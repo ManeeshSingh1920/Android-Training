@@ -1,0 +1,2 @@
+# allow other platform apps to find simpleservice
+allow platform_app simpleservice_service:service_manager find;

@@ -1,0 +1,17 @@
+android_app {
+    name: "HidlTestApp",
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    certificate: "platform",
+    product_specific: true,
+    manifest: "AndroidManifest.xml",
+    
+    static_libs: [
+        "android.hardware.echo-V1.0-java",
+        "android.hidl.base-V1.0-java",
+    ],
+    
+    optimize: {
+        enabled: false,
+    },
+}
